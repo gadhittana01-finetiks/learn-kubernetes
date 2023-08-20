@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: go-api
+  labels:
+    name: go-api
+spec:
+  selector:
+    matchLabels:
+      name: go-api
+  template:
+    metadata:
+      name: go-api
+      labels:
+        name: go-api
+    spec:
+      containers:
+        - name: go-api
+          image: gadhittana01/goapi:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /get-books
+              port: 3000
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1

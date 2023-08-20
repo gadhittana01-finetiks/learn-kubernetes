@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: go-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-api
+  template:
+    metadata:
+      name: go-api
+      labels:
+        app: go-api
+    spec:
+      containers:
+        - name: go-api
+          image: gadhittana01/goapi:latest
+          ports:
+            - containerPort: 3000

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: go-api
+spec:
+  containers:
+    - name: go-api
+      image: gadhittana01/goapi:latest
+      ports:
+        - containerPort: 3000
+      livenessProbe:
+        httpGet:
+          path: /get-books
+          port: 3000
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 3
